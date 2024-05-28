@@ -25,6 +25,10 @@ export async function uploadFunc(filePath) {
     };
 
     fs.readFile(filePath, async(err, data) => {
-        const stub = await uploadBytesResumable(storageRef, data, metadata);
+        const stub = await uploadBytesResumable(storageRef, data, metadata).then(() => {
+            console.log("File uploaded successfully");
+        }).catch((error) => {
+            console.log(error);
+        })
     })
 }
