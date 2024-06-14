@@ -158,7 +158,7 @@ console.log("Back up cron job is set!");
         });
       }
     });
-    process.exit(1)
+    // process.exit(1)
   })()
 // });
 //set cron
