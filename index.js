@@ -156,6 +156,8 @@ console.log("Back up cron job is set!");
             }
           }
         });
+      }else{
+        console.log("Folder deleted successfully");
       }
     });
     // process.exit(1)
