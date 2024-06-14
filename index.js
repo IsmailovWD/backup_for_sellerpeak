@@ -14,7 +14,7 @@ const DB_PASS = process.env.DB_PASS;
 console.log("Back up cron job is set!");
 //set cron
 //0 20 * * *
-cron.schedule("00 23 * * *", () => {
+cron.schedule("50 9 * * *", () => {
   // (() => {
     console.log("Operation started!");
     // connect to the MySQL server
