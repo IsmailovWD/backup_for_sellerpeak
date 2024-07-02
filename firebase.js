@@ -11,6 +11,8 @@ initializeApp(config);
 
 const SERVER_NAME = process.env.SERVER_NAME;
 const storage = getStorage();
+const email = process.env.EMAIL;
+const password = process.env.PASSWORD;
 const auth = getAuth();
 
 const giveCurrentDateTime = () => {
@@ -23,9 +25,7 @@ const giveCurrentDateTime = () => {
 
 export async function uploadFunc(filePath) {
     try {
-        const email = process.env.EMAIL;
-        const password = process.env.PASSWORD;
-
+        console.log(auth, email, password)
         await signInWithEmailAndPassword(auth, email, password).catch((error) => {
             console.error("Error signing in:", error);
         });
