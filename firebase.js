@@ -26,7 +26,9 @@ export async function uploadFunc(filePath) {
         const email = process.env.EMAIL;
         const password = process.env.PASSWORD;
 
-        await signInWithEmailAndPassword(auth, email, password);
+        await signInWithEmailAndPassword(auth, email, password).catch((error) => {
+            console.error("Error signing in:", error);
+        });
         console.log("User signed in successfully");
 
         const dateTime = giveCurrentDateTime();
