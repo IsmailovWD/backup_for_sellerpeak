@@ -24,10 +24,9 @@ const giveCurrentDateTime = () => {
 }
 
 export async function uploadFunc(filePath) {
-    try {
-        console.log(auth, email, password)
+    // try {
         await signInWithEmailAndPassword(auth, email, password).catch((error) => {
-            console.error("Error signing in:", error);
+            console.error("Error in signInWithEmailAndPassword:", error);
         });
         console.log("User signed in successfully");
 
@@ -49,7 +48,7 @@ export async function uploadFunc(filePath) {
                 console.error("Error uploading file:", error);
             }
         });
-    } catch (error) {
-        console.error("Error in uploadFunc:", error);
-    }
+    // } catch (error) {
+    //     console.error("Error in uploadFunc:", error);
+    // }
 }

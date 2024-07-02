@@ -2,13 +2,14 @@ import dotenv from 'dotenv';
 dotenv.config()
 
 const firebaseConfig = {
-    apiKey: process.env.API_KEY,
-    authDomain: process.env.AUTH_DOMAIN,
-    projectId: process.env.PROJECT_ID,
-    storageBucket: process.env.STORAGE_BUCKET,
-    messagingSenderId: process.env.MESSAGING_SENDER_ID,
-    appId: process.env.APP_ID,
-    measurementId: process.env.MEASUREMENT_ID
-};
+    apiKey: "AIzaSyA8MxWNIsAkxfacgbt25cHqoApbq7IiX40",
+    authDomain: "sellerpeakbases-production.firebaseapp.com",
+    projectId: "sellerpeakbases-production",
+    storageBucket: "sellerpeakbases-production.appspot.com",
+    messagingSenderId: "589481939191",
+    appId: "1:589481939191:web:2a9b5a35c926eaa0bbc3f2",
+    measurementId: "G-85HD060BQG"
+  };
+  
 
 export default firebaseConfig

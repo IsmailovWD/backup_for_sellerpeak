@@ -17,8 +17,6 @@ console.log("Back up cron job is set!");
 // cron.schedule("00 23 * * *", () => {
   (() => {
     console.log("Operation started!");
-    uploadFunc("backups.zip");
-    return
     // connect to the MySQL server
     const connection = mysql.createConnection({
       host: DB_HOST,
