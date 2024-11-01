@@ -103,7 +103,7 @@ const performBackup = () => {
 
       const expectedBackups = results.length;
       let successfulBackups = 0;
-
+      console.log(results)
       results.forEach((result) => {
         backupDatabase(result.Database, (err) => {
           if (!err) {
