@@ -68,7 +68,6 @@ console.log("Back up cron job is set!");
                           `successfully backed up ${database} to ${fileName}`
                         );
                         successfulBackups++;
-                        console.log(successfulBackups === expectedBackups, successfulBackups, expectedBackups)
                         if (successfulBackups === expectedBackups) {
                           const output = fs.createWriteStream("backups.zip");
                           const archive = archiver("zip", {
@@ -125,6 +124,7 @@ console.log("Back up cron job is set!");
                       `successfully backed up ${database} to ${fileName}`
                     );
                     successfulBackups++;
+                    console.log(successfulBackups === expectedBackups, successfulBackups, expectedBackups)
                     if (successfulBackups === expectedBackups) {
                       const output = fs.createWriteStream("backups.zip");
                       const archive = archiver("zip", {
