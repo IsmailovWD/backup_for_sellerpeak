@@ -22,6 +22,7 @@ console.log("Back up cron job is set!");
     host: DB_HOST,
     user: DB_USER,
     password: DB_PASS,
+    connectTimeout: 60 * 60 * 1000,
   });
   connection.connect((err) => {
     if (err) {
