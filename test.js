@@ -8,30 +8,18 @@ import { uploadFunc } from "./firebase.js";
 
 dotenv.config();
 
-// Create a connection to the MySQL server
+// Create a connection pool to the MySQL server
 const DB_USER = process.env.DB_USER;
 const DB_HOST = process.env.DB_HOST;
 const DB_PASS = process.env.DB_PASS;
 
-// Function to create a MySQL connection
-const createConnection = () => {
-  const connection = mysql.createConnection({
-    host: DB_HOST,
-    user: DB_USER,
-    password: DB_PASS,
-    connectTimeout: 60 * 60 * 1000,
-  });
-
-  connection.connect((err) => {
-    if (err) {
-      console.error("Error connecting: " + err.stack);
-      return null;
-    }
-    console.log("Connected as id " + connection.threadId);
-  });
-
-  return connection;
-};
+const pool = mysql.createPool({
+  connectionLimit: 10, // Set the connection limit as needed
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASS,
+  connectTimeout: 60000, // 60 seconds
+});
 
 // Function to remove existing backups directory
 const clearBackupsDirectory = (callback) => {
@@ -88,22 +76,20 @@ const createBackupZip = (callback) => {
 // Main backup function
 const performBackup = () => {
   console.log("Operation started!");
-  const connection = createConnection();
-
-  if (!connection) return;
 
   clearBackupsDirectory(() => {
     fs.mkdirSync("backups");
-    connection.query("SHOW DATABASES", (error, results) => {
+
+    pool.query("SHOW DATABASES", (error, results) => {
       if (error) {
         console.error("Error fetching databases: " + error);
-        connection.end();
+        pool.end();
         return;
       }
 
       const expectedBackups = results.length;
       let successfulBackups = 0;
-      console.log(results)
+
       results.forEach((result) => {
         backupDatabase(result.Database, (err) => {
           if (!err) {
@@ -116,7 +102,7 @@ const performBackup = () => {
                 // Upload to Firebase
                 uploadFunc("backups.zip");
               }
-              connection.end();
+              pool.end(); // Close the pool after all backups are done
             });
           }
         });
