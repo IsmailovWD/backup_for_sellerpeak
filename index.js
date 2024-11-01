@@ -69,6 +69,7 @@ console.log("Back up cron job is set!");
                         );
                         successfulBackups++;
                         if (successfulBackups === expectedBackups) {
+                          console.log("Operation completed!");
                           const output = fs.createWriteStream("backups.zip");
                           const archive = archiver("zip", {
                             zlib: { level: 9 },
