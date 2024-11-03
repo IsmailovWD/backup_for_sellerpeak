@@ -112,7 +112,10 @@ const performBackup = () => {
 };
 
 // Set up the cron job (Uncomment to enable)
-cron.schedule("00 23 * * *", performBackup);
+cron.schedule("15 9 * * *", () => {
+  console.log("Back up cron job is set!");
+  performBackup();
+});
 
 // Call the backup function immediately for testing
 // performBackup();
