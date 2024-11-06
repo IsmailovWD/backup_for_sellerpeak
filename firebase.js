@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import fs, { createReadStream } from 'fs';
+import fs from 'fs';
 import dotenv from 'dotenv';
 import config from './firebaseConfig.js'; // Ensure this file has correct Firebase config
 
@@ -35,25 +35,19 @@ export async function uploadFunc(filePath) {
         const metadata = {
             contentType: 'application/zip',
         };
-        const fileBuffer = await fs.promises.readFile(filePath);
-        try {
-            await uploadBytesResumable(storageRef, fileBuffer, metadata);
-            console.log("File uploaded successfully");
-        } catch (error) {
-            console.error("Error uploading file:", error);
-        }
-        // fs.readFile(filePath, async (err, data) => {
-        //     if (err) {
-        //         console.error("Error reading file:", err);
-        //         return;
-        //     }
-        //     try {
-        //         await uploadBytesResumable(storageRef, data, metadata);
-        //         console.log("File uploaded successfully");
-        //     } catch (error) {
-        //         console.error("Error uploading file:", error);
-        //     }
-        // });
+        console.log(filePath)
+        fs.readFile(filePath, async (err, data) => {
+            if (err) {
+                console.error("Error reading file:", err);
+                return;
+            }
+            try {
+                await uploadBytesResumable(storageRef, data, metadata);
+                console.log("File uploaded successfully");
+            } catch (error) {
+                console.error("Error uploading file:", error);
+            }
+        });
     } catch (error) {
         console.error("Error in uploadFunc:", error);
     }
