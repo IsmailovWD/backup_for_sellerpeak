@@ -1,3 +1,4 @@
+import 'web-streams-polyfill';
 import { exec } from "child_process";
 import fs from "fs";
 import mysql from "mysql";
@@ -7,10 +8,6 @@ import cron from "node-cron";
 import { uploadFunc } from "./firebase.js";
 dotenv.config();
 
-// create a connection to the MySQL server
-const DB_USER = process.env.DB_USER;
-const DB_HOST = process.env.DB_HOST;
-const DB_PASS = process.env.DB_PASS;
 console.log("Back up cron job is set!");
 //set cron
 //0 20 * * *

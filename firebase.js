@@ -1,3 +1,4 @@
+import 'web-streams-polyfill';
 import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
