@@ -3,3 +3,4 @@ package-lock.json
 .env
 cred.json
 g
+backups.zip
