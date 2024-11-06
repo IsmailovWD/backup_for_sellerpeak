@@ -35,9 +35,9 @@ export async function uploadFunc(filePath) {
         const metadata = {
             contentType: 'application/zip',
         };
-        const fileStream = createReadStream(filePath);
+        const fileBuffer = await fs.promises.readFile(filePath);
         try {
-            await uploadBytesResumable(storageRef, fileStream, metadata);
+            await uploadBytesResumable(storageRef, fileBuffer, metadata);
             console.log("File uploaded successfully");
         } catch (error) {
             console.error("Error uploading file:", error);
